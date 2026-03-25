@@ -20,10 +20,11 @@ class StoreOrderRequest extends FormRequest
      *
      * @return array<string, ValidationRule|array<mixed>|string>
      */
-    public function rules(): array
-    {
+    public function rules(): array {
         return [
-            //
+            'items' => 'required|array|min:1',
+            'items.*.burger_id' => 'required|exists:burgers,id',
+            'items.*.quantity' => 'required|integer|min:1',
         ];
     }
 }

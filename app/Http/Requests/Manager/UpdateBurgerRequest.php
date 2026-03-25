@@ -23,7 +23,12 @@ class UpdateBurgerRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'nom' => 'sometimes|string|max:255',
+            'prix' => 'sometimes|numeric|min:0',
+            'description' => 'sometimes|string',
+            'image' => 'nullable|image|mimes:jpg,png,webp|max:2048',
+            'stock' => 'sometimes|integer|min:0',
+            'category_id' => 'sometimes|exists:categories,id',
         ];
     }
 }

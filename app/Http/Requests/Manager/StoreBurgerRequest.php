@@ -20,10 +20,14 @@ class StoreBurgerRequest extends FormRequest
      *
      * @return array<string, ValidationRule|array<mixed>|string>
      */
-    public function rules(): array
-    {
+    public function rules(): array {
         return [
-            //
+            'nom' => 'required|string|max:255',
+            'prix' => 'required|numeric|min:0',
+            'description' => 'required|string',
+            'image' => 'required|image|mimes:jpg,png,webp|max:2048',
+            'stock' => 'required|integer|min:0',
+            'category_id' => 'required|exists:categories,id',
         ];
     }
 }

@@ -20,10 +20,11 @@ class StorePaymentRequest extends FormRequest
      *
      * @return array<string, ValidationRule|array<mixed>|string>
      */
-    public function rules(): array
-    {
+    public function rules(): array {
         return [
-            //
+            'order_id' => 'required|exists:orders,id|unique:payments,order_id',
+            'montant' => 'required|numeric|min:0',
+            'date_paiement' => 'required|date',
         ];
     }
 }
