@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Manager;
 
-use App\Models\Burger;
-use App\Http\Requests\StoreBurgerRequest;
-use App\Http\Requests\UpdateBurgerRequest;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Manager\StorePaymentRequest;
+use App\Http\Requests\Manager\UpdatePaymentRequest;
+use App\Models\Payment;
 
-class BurgerController extends Controller
+class PaymentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,7 +28,7 @@ class BurgerController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreBurgerRequest $request)
+    public function store(StorePaymentRequest $request)
     {
         //
     }
@@ -35,7 +36,7 @@ class BurgerController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Burger $burger)
+    public function show(Payment $payment)
     {
         //
     }
@@ -43,7 +44,7 @@ class BurgerController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Burger $burger)
+    public function edit(Payment $payment)
     {
         //
     }
@@ -51,7 +52,7 @@ class BurgerController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateBurgerRequest $request, Burger $burger)
+    public function update(UpdatePaymentRequest $request, Payment $payment)
     {
         //
     }
@@ -59,7 +60,7 @@ class BurgerController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Burger $burger)
+    public function destroy(Payment $payment)
     {
         //
     }
