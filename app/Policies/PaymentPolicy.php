@@ -27,9 +27,9 @@ class PaymentPolicy
     /**
      * Determine whether the user can create models.
      */
-    public function create(User $user): bool
+    public function create(User $user, Order $order): bool
     {
-        return false;
+        return $user->hasRole('manager') && $order->status !== 'payee';
     }
 
     /**

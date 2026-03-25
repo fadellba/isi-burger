@@ -2,10 +2,10 @@
 
 namespace App\Policies;
 
-use App\Models\Burger;
+use App\Models\Category;
 use App\Models\User;
 
-class BurgerPolicy
+class CategoryPolicy
 {
     /**
      * Determine whether the user can view any models.
@@ -15,7 +15,7 @@ class BurgerPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Burger $burger): bool
+    public function view(User $user, Category $category): bool
     {
         return false;
     }
@@ -28,17 +28,17 @@ class BurgerPolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Burger $burger): bool { return $user->hasRole('manager'); }
+    public function update(User $user, Category $category): bool { return $user->hasRole('manager'); }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Burger $burger): bool { return $user->hasRole('manager'); }
+    public function delete(User $user, Category $category): bool { return $user->hasRole('manager'); }
 
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, Burger $burger): bool
+    public function restore(User $user, Category $category): bool
     {
         return false;
     }
@@ -46,7 +46,7 @@ class BurgerPolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, Burger $burger): bool
+    public function forceDelete(User $user, Category $category): bool
     {
         return false;
     }

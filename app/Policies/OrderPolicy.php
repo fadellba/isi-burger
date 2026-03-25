@@ -4,10 +4,43 @@ namespace App\Policies;
 
 use App\Models\Order;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
 
 class OrderPolicy
 {
+
+    /**
+     * Determine whether the user can view the model.
+     */
+    public function view(User $user, Order $order): bool
+    {
+        if ($user->hasRole('manager')) {
+            return true;
+        }
+        return $user->id === $order->user_id;
+    }
+
+    /**
+     * Determine whether the user can create models.
+     */
+    public function create(User $user): bool
+    {
+        return $user->hasRole('client');
+    }
+
+    public function cancel(User $user, Order $order): bool
+    {
+        if ($user->hasRole('manager')) {
+            return true;
+        }
+        return $user->id === $order->user_id && $order->status === 'en_attente';
+    }
+
+    public function updateStatus(User $user): bool
+    {
+        return $user->hasRole('manager');
+    }
+
+
     /**
      * Determine whether the user can view any models.
      */
@@ -16,21 +49,6 @@ class OrderPolicy
         return false;
     }
 
-    /**
-     * Determine whether the user can view the model.
-     */
-    public function view(User $user, Order $order): bool
-    {
-        return false;
-    }
-
-    /**
-     * Determine whether the user can create models.
-     */
-    public function create(User $user): bool
-    {
-        return false;
-    }
 
     /**
      * Determine whether the user can update the model.

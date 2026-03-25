@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Manager;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Manager\StoreOrderRequest;
+use App\Http\Requests\Customer\StoreOrderRequest;
 use App\Http\Requests\Manager\UpdateOrderRequest;
 use App\Models\Order;
 
