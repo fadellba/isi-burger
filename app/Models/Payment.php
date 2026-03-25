@@ -10,6 +10,7 @@ class Payment extends Model
     /** @use HasFactory<\Database\Factories\PaymentFactory> */
     use HasFactory;
 
+    protected $fillable = ['order_id', 'montant', 'date_paiement'];
     public function order()
     {
         return $this->belongsTo(Order::class);

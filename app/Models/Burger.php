@@ -10,6 +10,8 @@ class Burger extends Model
     /** @use HasFactory<\Database\Factories\BurgerFactory> */
     use HasFactory;
 
+    protected $fillable = ['nom', 'prix', 'description', 'image', 'stock', 'category_id', 'is_active'];
+
     public function category() {
         /* belongsTo (relation un a un)
         un burger est associer a un seul category*/

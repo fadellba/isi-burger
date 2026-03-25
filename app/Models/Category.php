@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
+    protected $fillable = ['nom', 'description'];
     public function burgers()
     {
         return $this->hasMany(Burger::class);
