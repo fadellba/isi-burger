@@ -49,7 +49,6 @@ class OrderPolicy
         return false;
     }
 
-
     /**
      * Determine whether the user can update the model.
      */
