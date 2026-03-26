@@ -6,15 +6,33 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Customer\StoreOrderRequest;
 use App\Http\Requests\Manager\UpdateOrderRequest;
 use App\Models\Order;
+use App\Services\OrderService;
+use Request;
 
 class OrderController extends Controller
 {
+    protected OrderService $orderService;
+
+    public function __construct(OrderService $orderService)
+    {
+        $this->orderService = $orderService;
+        $this->authorizeResource(Order::class, 'order');
+    }
+
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $query = Order::with(['user', 'burgers'])->latest();
+
+        if ($request->has('status')) {
+            $query->where('status', $request->status);
+        }
+
+        $orders = $query->paginate(15);
+
+        return view('manager.orders.index', compact('orders'));
     }
 
     /**
@@ -38,7 +56,7 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        //
+        return view('manager.orders.show', compact('order'));
     }
 
     /**
@@ -51,10 +69,12 @@ class OrderController extends Controller
 
     /**
      * Update the specified resource in storage.
+     * @throws \Exception
      */
     public function update(UpdateOrderRequest $request, Order $order)
     {
-        //
+        $this->orderService->updateStatus($order, $request->status);
+        return back()->with('success', "Le statut a été mis à jour.");
     }
 
     /**

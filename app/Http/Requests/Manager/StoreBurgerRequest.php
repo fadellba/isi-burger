@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Manager;
 
+use App\Models\Burger;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -12,7 +13,7 @@ class StoreBurgerRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return $this->user()->can('create', Burger::class);;
     }
 
     /**

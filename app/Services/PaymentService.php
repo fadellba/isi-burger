@@ -5,9 +5,13 @@ use App\Models\Order;
 use App\Models\Payment;
 use Illuminate\Support\Facades\DB;
 use Exception;
+use Throwable;
 
 class PaymentService
 {
+    /**
+     * @throws Throwable
+     */
     public function recordPayment(Order $order, array $data)
     {
         if ($order->payment()->exists() || $order->status === 'payee') {

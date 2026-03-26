@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Collection;
 
 class CategoryService
 {
-    public function getAllForCatalogue(): Collection
+    public function getActiveCategoriesWithBurgers(): Collection
     {
         return Category::with(['burgers' => function($query) {
             $query->where('stock', '>', 0);

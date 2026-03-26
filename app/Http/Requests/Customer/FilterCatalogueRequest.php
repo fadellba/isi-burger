@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Customer;
 
+use App\Models\Burger;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -12,7 +13,7 @@ class FilterCatalogueRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return $this->user()->can('view', Burger::class);
     }
 
     /**

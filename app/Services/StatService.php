@@ -3,13 +3,15 @@ namespace App\Services;
 
 use App\Models\Order;
 use App\Models\Payment;
-use App\Models\Burger;
 use App\Models\Category;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
+use LaravelIdea\Helper\App\Models\_IH_Category_C;
+use LaravelIdea\Helper\App\Models\_IH_Order_C;
 
 class StatService
 {
-    public function getQuickStats()
+    public function getQuickStats(): array
     {
         return [
             'orders_today' => Order::whereDate('created_at', today())->count(),
@@ -19,21 +21,21 @@ class StatService
             'revenue_today' => Payment::whereDate('date_paiement', today())->sum('montant'),
         ];
     }
-    public function getOrdersPerMonth()
+    public function getOrdersPerMonth(): array|_IH_Order_C
     {
         return Order::select(
             DB::raw('count(id) as count'),
             DB::raw("DATE_FORMAT(created_at, '%Y-%m') as month")
         )
             ->groupBy('month')
-            ->orderBy('month', 'asc')
+            ->orderBy('month')
             ->get();
     }
-    public function getProductsByCategory()
+    public function getProductsByCategory(): _IH_Category_C|array
     {
         return Category::withCount('burgers')->get(['nom', 'burgers_count']);
     }
-    public function getTopSellingBurgers()
+    public function getTopSellingBurgers(): Collection
     {
         return DB::table('burger_order')
             ->join('burgers', 'burger_order.burger_id', '=', 'burgers.id')

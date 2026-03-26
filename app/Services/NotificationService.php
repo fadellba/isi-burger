@@ -23,8 +23,7 @@ class NotificationService
 
         $managers = User::where('role', 'manager')->get();
         foreach ($managers as $manager) {
-            /*Ici on pouvait utilise les Notifications Database de Laravel*/
-            Mail::to($manager->email)->send(new NewOrderAdminMail($order));
+            Mail::to($manager->email)->send(new NewOrderAdminMail($order, $manager));
         }
     }
 
@@ -33,7 +32,7 @@ class NotificationService
      */
     public function sendInvoice(Order $order): void
     {
-        $pdfPath = $this->invoiceService->generateInvoice($order);
-        Mail::to($order->user->email)->send(new InvoiceMail($order, $pdfPath));
+        //$pdfPath = $this->invoiceService->generateInvoice($order);
+        Mail::to($order->user->email)->send(new InvoiceMail($order));
     }
 }

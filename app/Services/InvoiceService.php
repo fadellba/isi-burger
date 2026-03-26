@@ -8,6 +8,9 @@ use Exception;
 
 class InvoiceService
 {
+    /**
+     * @throws Exception
+     */
     public function generateInvoice(Order $order): string
     {
         if ($order->burgers->isEmpty()) {

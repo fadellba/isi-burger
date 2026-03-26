@@ -12,7 +12,8 @@ class UpdateBurgerRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        $burger = $this->route('burger');
+        return $this->user()->can('update', $burger);
     }
 
     /**

@@ -5,17 +5,22 @@ use App\Models\Order;
 use App\Models\Burger;
 use Illuminate\Support\Facades\DB;
 use Exception;
+use Throwable;
 
 class OrderService
 {
-    protected $burgerService;
-    protected $notificationService;
+    protected BurgerService $burgerService;
+    protected NotificationService $notificationService;
 
     public function __construct(BurgerService $burgerService, NotificationService $notificationService)
     {
         $this->burgerService = $burgerService;
         $this->notificationService = $notificationService;
     }
+
+    /**
+     * @throws Throwable
+     */
     public function createOrder(array $data, int $userId)
     {
         foreach ($data['items'] as $item) {
@@ -56,7 +61,11 @@ class OrderService
             return $order;
         });
     }
-    public function updateStatus(Order $order, string $newStatus)
+
+    /**
+     * @throws Exception
+     */
+    public function updateStatus(Order $order, string $newStatus): void
     {
         $oldStatus = $order->status;
         $order->update(['status' => $newStatus]);

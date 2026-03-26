@@ -2,8 +2,8 @@
 
 namespace App\Mail;
 
+use App\Models\Order;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Attachment;
 use Illuminate\Mail\Mailables\Content;
@@ -17,9 +17,11 @@ class InvoiceMail extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public Order $order;
+
+    public function __construct(Order $order)
     {
-        //
+        $this->order = $order;
     }
 
     /**
